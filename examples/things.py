@@ -10,11 +10,11 @@ import falcon
 # other things) that you think in terms of resources and state
 # transitions, which map to HTTP verbs.
 class ThingsResource:
-    def on_get(self, req, resp):
+    def on_get(self, req: falcon.request.Request, resp: falcon.response.Response) -> None:
         """Handles GET requests"""
-        resp.status = falcon.HTTP_200  # This is the default status
-        resp.content_type = falcon.MEDIA_TEXT  # Default is JSON, so override
-        resp.body = ('\nTwo things awe me most, the starry sky '
+        resp.status: str = falcon.HTTP_200  # This is the default status
+        resp.content_type: str = falcon.MEDIA_TEXT  # Default is JSON, so override
+        resp.body: str = ('\nTwo things awe me most, the starry sky '
                      'above me and the moral law within me.\n'
                      '\n'
                      '    ~ Immanuel Kant\n\n')
@@ -22,10 +22,10 @@ class ThingsResource:
 
 # falcon.API instances are callable WSGI apps
 # in larger applications the app is created in a separate file
-app = falcon.App()
+app: falcon.App = falcon.App()
 
 # Resources are represented by long-lived class instances
-things = ThingsResource()
+things: ThingsResource = ThingsResource()
 
 # things will handle all requests to the '/things' URL path
 app.add_route('/things', things)
